@@ -37,6 +37,9 @@ export const updateBook = async (id, newTitle, newStart, newEnd) => {
       start: newStart,
       end: newEnd
     }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
   return response.status;
