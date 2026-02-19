@@ -16,6 +16,10 @@ export const addNewBook = async (newTitle, newStart, newEnd) => {
     },
   });
 
+  if (!response.ok) {
+    throw new Error(`Failed to add book: ${response.status}`);
+  }
+
   const newBook = await response.json();
 
   return newBook;
@@ -23,6 +27,11 @@ export const addNewBook = async (newTitle, newStart, newEnd) => {
 
 export const getBooks = async () => {
   const response = await fetch(`${API_ENDPOINT}/books`);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch books: ${response.status}`);
+  }
+
   const books = await response.json();
 
   return books;
@@ -42,6 +51,10 @@ export const updateBook = async (id, newTitle, newStart, newEnd) => {
     },
   });
 
+  if (!response.ok) {
+    throw new Error(`Failed to update book: ${response.status}`);
+  }
+
   return response.status;
 };
 
@@ -50,6 +63,10 @@ export const deleteBook = async (id) => {
   const response = await fetch(`${API_ENDPOINT}/books/${id}`, {
     method: "DELETE",
   });
+
+  if (!response.ok) {
+    throw new Error(`Failed to delete book: ${response.status}`);
+  }
 
   return response.status;
 };
